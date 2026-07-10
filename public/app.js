@@ -20,8 +20,10 @@ const statusClass = {
   done: 'status-done'
 };
 
+const API_BASE = location.protocol === 'file:' ? 'http://127.0.0.1:3000' : '';
+
 async function api(path, options = {}) {
-  const response = await fetch(path, {
+  const response = await fetch(`${API_BASE}${path}`, {
     headers: { 'Content-Type': 'application/json' },
     ...options
   });
