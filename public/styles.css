@@ -272,15 +272,15 @@ button.secondary {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 980px;
+  min-width: 1040px;
 }
 
 th,
 td {
   border-bottom: 1px solid var(--line);
-  padding: 10px 8px;
+  padding: 12px 10px;
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 th {
@@ -290,12 +290,44 @@ th {
   text-transform: uppercase;
 }
 
+.col-number,
+.col-person,
+.col-date,
+.col-status,
+.col-actions {
+  white-space: nowrap;
+}
+
+.col-number {
+  width: 108px;
+}
+
+.col-person {
+  width: 118px;
+}
+
+.col-date {
+  width: 118px;
+}
+
+.col-status {
+  width: 104px;
+  text-align: center;
+}
+
+.col-actions {
+  width: 230px;
+}
+
 .status {
+  align-items: center;
   display: inline-flex;
+  justify-content: center;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
-  padding: 4px 8px;
+  min-width: 76px;
+  padding: 6px 10px;
 }
 
 .status-new {
@@ -321,12 +353,17 @@ th {
 .row-actions {
   display: grid;
   gap: 8px;
-  min-width: 200px;
+  width: 210px;
 }
 
 .row-actions button,
 .row-actions select {
-  padding: 7px 8px;
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.row-actions button {
+  font-size: 13px;
 }
 
 @media (max-width: 920px) {

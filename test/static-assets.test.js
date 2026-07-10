@@ -25,3 +25,13 @@ test('request form layout leaves enough room for employee selects', () => {
   assert.match(js, /option\.textContent = employee\.fullName/);
   assert.match(js, /option\.title = `\$\{employee\.fullName\} - \$\{employee\.departmentName\}`/);
 });
+
+test('request table keeps compact columns from wrapping awkwardly', () => {
+  const html = fs.readFileSync(path.join(process.cwd(), 'public', 'index.html'), 'utf8');
+  const css = fs.readFileSync(path.join(process.cwd(), 'public', 'styles.css'), 'utf8');
+
+  assert.match(html, /<th class="col-number">Номер<\/th>/);
+  assert.match(css, /\.col-number,[\s\S]*?white-space:\s*nowrap/);
+  assert.match(css, /\.status\s*{[\s\S]*?min-width:\s*76px/);
+  assert.match(css, /\.row-actions\s*{[\s\S]*?width:\s*210px/);
+});

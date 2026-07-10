@@ -142,14 +142,14 @@ function renderRequests() {
   state.requests.forEach((request) => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${escapeHtml(request.number)}</td>
+      <td class="col-number">${escapeHtml(request.number)}</td>
       <td>${escapeHtml(request.description)}</td>
-      <td>${escapeHtml(request.authorName)}</td>
-      <td>${escapeHtml(request.assigneeName)}</td>
-      <td>${escapeHtml(request.departmentName)}</td>
-      <td class="${request.isOverdue ? 'overdue' : ''}">${escapeHtml(request.dueDate)}</td>
-      <td><span class="status ${statusClass[request.statusCode]}">${escapeHtml(request.statusName)}</span></td>
-      <td></td>
+      <td class="col-person">${escapeHtml(request.authorName)}</td>
+      <td class="col-person">${escapeHtml(request.assigneeName)}</td>
+      <td class="col-department">${escapeHtml(request.departmentName)}</td>
+      <td class="col-date ${request.isOverdue ? 'overdue' : ''}">${escapeHtml(request.dueDate)}</td>
+      <td class="col-status"><span class="status ${statusClass[request.statusCode]}">${escapeHtml(request.statusName)}</span></td>
+      <td class="col-actions"></td>
     `;
 
     row.lastElementChild.append(renderActions(request));
