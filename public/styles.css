@@ -1,15 +1,19 @@
 :root {
   color-scheme: light;
-  --bg: #f5f7fb;
+  --bg: #121b45;
+  --bg-deep: #1c1f46;
+  --nav: #215a9d;
   --panel: #ffffff;
   --text: #172033;
   --muted: #667085;
   --line: #d9e0ea;
-  --accent: #176b87;
-  --accent-strong: #114f63;
+  --accent: #2474c7;
+  --accent-strong: #1b5798;
+  --accent-soft: #e8f2ff;
   --ok: #1f7a4d;
   --warn: #a15c08;
   --bad: #b42318;
+  --shadow: 0 18px 45px rgba(4, 10, 34, 0.24);
 }
 
 * {
@@ -18,9 +22,13 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(31, 90, 157, 0.14), transparent 36%),
+    linear-gradient(90deg, rgba(18, 28, 68, 0.92), rgba(18, 27, 69, 0.72)),
+    var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 .topbar {
@@ -28,14 +36,75 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 24px 32px;
-  background: #ffffff;
-  border-bottom: 1px solid var(--line);
+  padding: 18px max(32px, calc((100vw - 1180px) / 2));
+  background: var(--bg-deep);
+  color: #ffffff;
+}
+
+.brand,
+.top-actions {
+  align-items: center;
+  display: flex;
+}
+
+.brand {
+  gap: 14px;
+}
+
+.brand-mark {
+  display: grid;
+  gap: 3px;
+  grid-template-columns: repeat(2, 11px);
+  width: 27px;
+}
+
+.brand-mark span {
+  aspect-ratio: 1;
+  background: linear-gradient(145deg, #47a5ff, #1567c4);
+  box-shadow: inset -2px -2px 0 rgba(4, 35, 91, 0.35);
+  transform: rotate(30deg) skew(-8deg);
+}
+
+.brand-mark span:first-child {
+  grid-column: 1;
+}
+
+.brand-mark span:nth-child(2) {
+  grid-column: 2;
+}
+
+.brand-mark span:nth-child(3) {
+  grid-column: 1;
+}
+
+.top-actions {
+  gap: 18px;
+  color: #c8d9f5;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.navline {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  min-height: 40px;
+  padding: 0 max(32px, calc((100vw - 1180px) / 2));
+  background: var(--nav);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.navline span {
+  opacity: 0.95;
 }
 
 .eyebrow {
   margin: 0 0 4px;
-  color: var(--accent);
+  color: #4aa3ff;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0;
@@ -48,7 +117,9 @@ h2 {
 }
 
 h1 {
-  font-size: 28px;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 h2 {
@@ -59,7 +130,9 @@ h2 {
   display: grid;
   grid-template-columns: 340px 1fr;
   gap: 20px;
-  padding: 20px 32px 32px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 34px 32px 44px;
 }
 
 .content {
@@ -71,11 +144,12 @@ h2 {
 .metric {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
 }
 
 .panel {
-  padding: 18px;
+  padding: 20px;
 }
 
 .create-panel {
@@ -102,8 +176,8 @@ input,
 select,
 textarea {
   width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 6px;
+  border: 1px solid #cbd6e4;
+  border-radius: 3px;
   color: var(--text);
   font: inherit;
   padding: 10px 11px;
@@ -115,7 +189,7 @@ textarea {
 
 button {
   border: 0;
-  border-radius: 6px;
+  border-radius: 2px;
   background: var(--accent);
   color: #ffffff;
   cursor: pointer;
@@ -129,8 +203,8 @@ button:hover {
 }
 
 button.secondary {
-  background: #eef3f8;
-  color: var(--accent-strong);
+  background: #2c78c9;
+  color: #ffffff;
 }
 
 .message {
@@ -147,6 +221,7 @@ button.secondary {
 
 .metric {
   padding: 16px;
+  border-top: 3px solid var(--accent);
 }
 
 .metric span {
@@ -209,7 +284,8 @@ td {
 }
 
 th {
-  color: var(--muted);
+  background: #f1f5fb;
+  color: #344054;
   font-size: 12px;
   text-transform: uppercase;
 }
@@ -223,7 +299,7 @@ th {
 }
 
 .status-new {
-  background: #e9f3ff;
+  background: var(--accent-soft);
   color: #175cd3;
 }
 
@@ -274,6 +350,16 @@ th {
     align-items: flex-start;
     flex-direction: column;
     padding: 18px;
+  }
+
+  .top-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navline {
+    padding: 0 18px;
   }
 
   .metrics,

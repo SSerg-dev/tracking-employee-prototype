@@ -8,12 +8,30 @@
   </head>
   <body>
     <header class="topbar">
-      <div>
-        <p class="eyebrow">Employee Requests</p>
-        <h1>tracking-employee-prototype</h1>
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div>
+          <p class="eyebrow">PTMK style prototype</p>
+          <h1>tracking-employee-prototype</h1>
+        </div>
       </div>
-      <button id="refreshButton" class="secondary">Обновить</button>
+      <div class="top-actions">
+        <span>Заявки сотрудников</span>
+        <button id="refreshButton" class="secondary">Обновить</button>
+      </div>
     </header>
+
+    <nav class="navline" aria-label="Основные разделы">
+      <span>Главная</span>
+      <span>Сотрудники</span>
+      <span>Заявки</span>
+      <span>Отчеты</span>
+      <span>Производительность</span>
+    </nav>
 
     <main class="layout">
       <section class="panel create-panel">
