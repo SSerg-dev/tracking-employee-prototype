@@ -17,19 +17,38 @@ function createServer(db) {
   const reports = new ReportRepository(db);
 
   return http.createServer(async (req, res) => {
+    await handleRequest({ req, res, employees, requests, reports });
+  });
+}
+
+async function handleRequest({ req, res, employees, requests, reports }) {
+  try {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+
+    if (url.pathname.startsWith('/api/')) {
+      await routeApi({ req, res, url, employees, requests, reports });
+      return;
+    }
+
+    serveStatic(url.pathname, res);
+  } catch (error) {
+    sendJson(res, error.statusCode || 500, { error: error.message || 'Internal server error' });
+  }
+}
+
+function createRequestHandler(db) {
+  const employees = new EmployeeRepository(db);
+  const requests = new RequestRepository(db);
+  const reports = new ReportRepository(db);
+
+  return async (req, res) => {
     try {
       const url = new URL(req.url, `http://${req.headers.host}`);
-
-      if (url.pathname.startsWith('/api/')) {
-        await routeApi({ req, res, url, employees, requests, reports });
-        return;
-      }
-
-      serveStatic(url.pathname, res);
+      await routeApi({ req, res, url, employees, requests, reports });
     } catch (error) {
       sendJson(res, error.statusCode || 500, { error: error.message || 'Internal server error' });
     }
-  });
+  };
 }
 
 async function routeApi({ req, res, url, employees, requests, reports }) {
@@ -147,4 +166,4 @@ function sendJson(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
-module.exports = { createServer };
+module.exports = { createRequestHandler, createServer };

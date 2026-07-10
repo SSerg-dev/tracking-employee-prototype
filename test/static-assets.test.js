@@ -35,3 +35,13 @@ test('request table keeps compact columns from wrapping awkwardly', () => {
   assert.match(css, /\.status\s*{[\s\S]*?min-width:\s*76px/);
   assert.match(css, /\.row-actions\s*{[\s\S]*?width:\s*210px/);
 });
+
+test('vercel deployment has serverless API entrypoint and Node 22 runtime', () => {
+  const packageJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'));
+  const apiEntry = fs.readFileSync(path.join(process.cwd(), 'api', '[...path].js'), 'utf8');
+  const vercelJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'vercel.json'), 'utf8'));
+
+  assert.equal(packageJson.engines.node, '22.x');
+  assert.match(apiEntry, /createRequestHandler/);
+  assert.equal(vercelJson.functions['api/**/*.js'].maxDuration, 10);
+});

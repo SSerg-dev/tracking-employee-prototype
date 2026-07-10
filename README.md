@@ -42,6 +42,12 @@ On Windows, to keep the local server running in the background, use:
 powershell -ExecutionPolicy Bypass -File .\scripts\start-detached.ps1
 ```
 
+## Deploy to Vercel
+
+The project includes `vercel.json` and a serverless API entrypoint in `api/[...path].js`.
+
+Vercel serves the static frontend from `public` and routes `/api/*` requests to the serverless function. The demo SQLite database is created in `/tmp`, which is suitable for this prototype but is ephemeral in serverless environments.
+
 ## Business Process
 
 A request moves through this workflow:
