@@ -1,3 +1,6 @@
+const fs = require('node:fs');
+const path = require('node:path');
+
 const statuses = [
   { id: 1, code: 'new', name: 'Новая' },
   { id: 2, code: 'in_progress', name: 'В работе' },
@@ -11,9 +14,14 @@ const state = createDemoState();
 
 module.exports = async function handler(req, res) {
   try {
-    setJsonHeaders(res);
     const url = new URL(req.url, `https://${req.headers.host || 'localhost'}`);
     const pathname = url.pathname;
+
+    if (req.method === 'GET' && await serveStatic(pathname, res)) {
+      return;
+    }
+
+    setJsonHeaders(res);
 
     if (req.method === 'GET' && pathname === '/api/employees') {
       sendJson(res, 200, state.employees);
@@ -56,6 +64,39 @@ module.exports = async function handler(req, res) {
     sendJson(res, error.statusCode || 500, { error: error.message || 'Internal server error' });
   }
 };
+
+async function serveStatic(pathname, res) {
+  if (pathname === '/favicon.ico' || pathname === '/favicon.png') {
+    res.statusCode = 204;
+    res.end();
+    return true;
+  }
+
+  const staticFiles = {
+    '/': 'index.html',
+    '/index.html': 'index.html',
+    '/styles.css': 'styles.css',
+    '/app.js': 'app.js'
+  };
+
+  const fileName = staticFiles[pathname];
+  if (!fileName) {
+    return false;
+  }
+
+  const publicDir = path.join(process.cwd(), 'public');
+  const filePath = path.join(publicDir, fileName);
+  const contentTypes = {
+    '.html': 'text/html; charset=utf-8',
+    '.css': 'text/css; charset=utf-8',
+    '.js': 'text/javascript; charset=utf-8'
+  };
+
+  res.statusCode = 200;
+  res.setHeader('Content-Type', contentTypes[path.extname(fileName)] || 'application/octet-stream');
+  res.end(fs.readFileSync(filePath));
+  return true;
+}
 
 function createDemoState() {
   const employees = Array.from({ length: 40 }, (_, index) => {
