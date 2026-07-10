@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>tracking-employee-prototype</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Employee Requests</p>
+        <h1>tracking-employee-prototype</h1>
+      </div>
+      <button id="refreshButton" class="secondary">Обновить</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel create-panel">
+        <h2>Новая заявка</h2>
+        <form id="requestForm">
+          <label>
+            Автор
+            <select id="authorId" required></select>
+          </label>
+          <label>
+            Исполнитель
+            <select id="assigneeId" required></select>
+          </label>
+          <label>
+            Срок выполнения
+            <input id="dueDate" type="date" required>
+          </label>
+          <label>
+            Описание
+            <textarea id="description" rows="5" required></textarea>
+          </label>
+          <button type="submit">Создать заявку</button>
+        </form>
+        <p id="formMessage" class="message"></p>
+      </section>
+
+      <section class="content">
+        <section class="metrics" id="metrics"></section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <h2>Заявки</h2>
+            <span id="totalRequests"></span>
+          </div>
+          <div class="filters">
+            <select id="statusFilter">
+              <option value="">Все статусы</option>
+              <option value="new">Новая</option>
+              <option value="in_progress">В работе</option>
+              <option value="done">Выполнена</option>
+            </select>
+            <select id="assigneeFilter">
+              <option value="">Все исполнители</option>
+            </select>
+            <select id="departmentFilter">
+              <option value="">Все подразделения</option>
+            </select>
+            <label class="checkbox">
+              <input id="overdueFilter" type="checkbox">
+              Просроченные
+            </label>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Номер</th>
+                  <th>Описание</th>
+                  <th>Автор</th>
+                  <th>Исполнитель</th>
+                  <th>Подразделение</th>
+                  <th>Срок</th>
+                  <th>Статус</th>
+                  <th>Действия</th>
+                </tr>
+              </thead>
+              <tbody id="requestsBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
