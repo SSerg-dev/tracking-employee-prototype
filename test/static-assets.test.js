@@ -42,6 +42,7 @@ test('vercel deployment has serverless API entrypoint and Node 22 runtime', () =
   const vercelJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'vercel.json'), 'utf8'));
 
   assert.equal(packageJson.engines.node, '22.x');
-  assert.match(apiEntry, /createRequestHandler/);
+  assert.doesNotMatch(apiEntry, /node:sqlite/);
+  assert.match(apiEntry, /createDemoState/);
   assert.equal(vercelJson.functions['api/**/*.js'].maxDuration, 10);
 });

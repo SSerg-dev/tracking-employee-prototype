@@ -46,7 +46,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\start-detached.ps1
 
 The project includes `vercel.json` and a serverless API entrypoint in `api/[...path].js`.
 
-Vercel serves the static frontend from `public` and routes `/api/*` requests to the serverless function. The demo SQLite database is created in `/tmp`, which is suitable for this prototype but is ephemeral in serverless environments.
+Vercel serves the static frontend from `public` and routes `/api/*` requests to the serverless function. The Vercel API uses an in-memory demo dataset so the public demo can run reliably in a serverless environment. The full SQLite implementation remains available for local review, tests, seed generation, and benchmarking.
 
 ## Business Process
 
