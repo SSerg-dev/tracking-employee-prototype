@@ -23,6 +23,12 @@ Open: <http://127.0.0.1:3000>
 
 The app creates `data/tracking.sqlite` automatically and fills it with demo data if it is empty.
 
+On Windows, to keep the local server running in the background, use:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start-detached.ps1
+```
+
 ## Business Process
 
 A request moves through this workflow:
