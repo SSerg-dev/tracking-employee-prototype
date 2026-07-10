@@ -72,7 +72,8 @@ function fillEmployeeSelect(select, emptyLabel) {
   state.employees.forEach((employee) => {
     const option = document.createElement('option');
     option.value = employee.id;
-    option.textContent = `${employee.fullName} - ${employee.departmentName}`;
+    option.textContent = employee.fullName;
+    option.title = `${employee.fullName} - ${employee.departmentName}`;
     select.append(option);
   });
 }

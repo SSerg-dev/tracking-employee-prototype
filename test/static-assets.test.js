@@ -16,3 +16,12 @@ test('browser app has localhost API fallback for file protocol', () => {
   assert.match(js, /location\.protocol === 'file:'/);
   assert.match(js, /http:\/\/127\.0\.0\.1:3000/);
 });
+
+test('request form layout leaves enough room for employee selects', () => {
+  const css = fs.readFileSync(path.join(process.cwd(), 'public', 'styles.css'), 'utf8');
+  const js = fs.readFileSync(path.join(process.cwd(), 'public', 'app.js'), 'utf8');
+
+  assert.match(css, /grid-template-columns:\s*minmax\(400px,\s*420px\)\s*1fr/);
+  assert.match(js, /option\.textContent = employee\.fullName/);
+  assert.match(js, /option\.title = `\$\{employee\.fullName\} - \$\{employee\.departmentName\}`/);
+});

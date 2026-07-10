@@ -128,9 +128,9 @@ h2 {
 
 .layout {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: minmax(400px, 420px) 1fr;
   gap: 20px;
-  max-width: 1180px;
+  max-width: 1260px;
   margin: 0 auto;
   padding: 34px 32px 44px;
 }
@@ -321,7 +321,7 @@ th {
 .row-actions {
   display: grid;
   gap: 8px;
-  min-width: 180px;
+  min-width: 200px;
 }
 
 .row-actions button,
