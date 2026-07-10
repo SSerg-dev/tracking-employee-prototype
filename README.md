@@ -23,6 +23,13 @@ Open: <http://127.0.0.1:3000>
 
 The app creates `data/tracking.sqlite` automatically and fills it with demo data if it is empty.
 
+If you run the project from an IDE terminal, these commands are equivalent:
+
+```bash
+npm run dev
+node dev
+```
+
 On Windows, to keep the local server running in the background, use:
 
 ```powershell
