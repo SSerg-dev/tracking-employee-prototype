@@ -30,6 +30,12 @@ npm run dev
 node dev
 ```
 
+If port `3000` is already busy, the app is probably already running. Open <http://127.0.0.1:3000> or start another instance on a different port:
+
+```powershell
+$env:PORT=3001; npm run dev
+```
+
 On Windows, to keep the local server running in the background, use:
 
 ```powershell
